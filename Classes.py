@@ -4,9 +4,9 @@ class Adm:
         self.senha = senha
         self.id_adm = id_adm
     
-    def cadastrar_adm(self, user, senha, ida):
-        adm = Adm(user, senha, ida)
-        loja.inserir_adm(adm, ida)
+    def cadastrar_adm(self, user, senha):
+        adm = Adm(user, senha)
+        loja.inserir_adm(adm)
 
     def cadastrar_cliente(self, nome, cpf, idade, endereco, senha, idc):
         cliente = Cliente(nome, cpf, idade, endereco, senha, idc)
@@ -53,6 +53,12 @@ class Loja:
             if cpf == cliente.cpf and senha == cliente.senha:
                 return id
         return None
+    
+    def login_adm(self, user, senhaa):
+        for ida, admin in self.adm.items():
+            if user == admin.user and senhaa == admin.senha:
+                return ida
+        return None
 
     def inserir_cliente(self, valor, vetor):
         self.clientes[vetor] = valor
@@ -60,7 +66,8 @@ class Loja:
     def inserir_produto(self, valor, vetor):
         self.produtos[vetor] = valor
 
-    def inserir_adm(self, valor, vetor):
+    def inserir_adm(self, valor):
+        vetor = len(self.adm) + 1
         self.adm[vetor] = valor
 
 

@@ -2,16 +2,18 @@ from Classes import *
 
 import os
 
-
 sair = False
 menu_adm = 0
 menu_cli = 0
-admin = Adm("adm", "admin123", 0 )
+master = Adm("adm", "admin123",0)
+loja.inserir_adm(master)
 pdtID = 0
 contID = 0
 admID = 0
 
 while sair == False:
+    menu_adm = 0
+    loginCorreto = False
     try:
         os.system("cls")
         print(" --- BEM VINDO(A) AO VS STORE --- \n")
@@ -29,7 +31,11 @@ while sair == False:
                 user_login = input("Digite o user: ")
                 senha_login = input("Digite a senha: ")
 
-                if user_login == admin.user and senha_login == admin.senha:
+                for vetor, user in loja.adm.items():
+                    if user.user == user_login and user.senha == senha_login:
+                        loginCorreto = True
+
+                if loginCorreto == True:
                     os.system("cls")
                 
                     while menu_adm == 0:
@@ -71,7 +77,8 @@ while sair == False:
                                 user = input("USER: ")
                                 senhaa = input("SENHA: ")
 
-                                admin.cadastrar_adm(user, senhaa, ida)
+                                adm = Adm(user, senhaa, 0)
+                                loja.inserir_adm(adm)
                                 print("\nADM cadastrado com sucesso!")
 
 
