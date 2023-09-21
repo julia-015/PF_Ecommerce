@@ -2,13 +2,14 @@ from Classes import *
 
 import os
 
-loja = Loja("VS STORE", "Av. das Codificações, Nº1011", 123456789)
+
 sair = False
 menu_adm = 0
 menu_cli = 0
-admin = Adm("adm", "admin123", 1)
-
+admin = Adm("adm", "admin123", 0 )
+pdtID = 0
 contID = 0
+admID = 0
 
 while sair == False:
     try:
@@ -21,6 +22,7 @@ while sair == False:
         menu = int(input("\nDigite a opção desejada:  "))
         os.system("cls")
         
+
         match menu:
             case 1:
                 print("--- ADM LOGIN ---")
@@ -56,11 +58,38 @@ while sair == False:
                                 senha = input("SENHA: ")
 
                                 admin.cadastrar_cliente(nome, cpf, idade, endereco, senha, idc)
+                                print("\nCliente cadastrado com sucesso!")
+                                os.system("pause")
+                                os.system("cls")
 
                             case 2:
-                                pass
+                              #  os.system("cls")
+                                print("--- CADASTRO ADM--- \nPreencha as informações:\n")
+                                admID +=1
+                                ida = admID
+                                
+                                user = input("USER: ")
+                                senhaa = input("SENHA: ")
+
+                                admin.cadastrar_adm(user, senhaa, ida)
+                                print("\nADM cadastrado com sucesso!")
+
+
                             case 3:
-                                pass
+                                os.system("cls")
+                                pdtID += 1
+                                idp = pdtID
+                                
+                                print("--- CADASTRO DE PRODUTO --- \nPreencha as informações:\n")
+                                nome_produto = input("NOME DO PRODUTO: ")
+                                descricao = input("DESCRIÇÃO DO PRODUTO: ")
+                                valor = int(input("VALOR: "))
+
+                                admin.cadastrar_produto(nome_produto, descricao, valor, idp)
+                                print("\nProduto cadastrado com sucesso!")
+                                os.system("pause")
+                                os.system("cls")
+
                             case 4:
                                 pass
                             case 5:
@@ -95,5 +124,3 @@ while sair == False:
             print("Erro:", erro.__class__.__name__)
             os.system("pause")
             os.system("cls")
-
-
