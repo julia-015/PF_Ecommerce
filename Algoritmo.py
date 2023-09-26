@@ -5,8 +5,6 @@ import os
 sair = False
 menu_adm = 0
 menu_cli = 0
-master = Adm("adm", "admin123",0)
-loja.inserir_adm(master)
 pdtID = 0
 contID = 0
 admID = 0
@@ -63,13 +61,14 @@ while sair == False:
                                 endereco = input("ENDEREÇO: ")
                                 senha = input("SENHA: ")
 
-                                admin.cadastrar_cliente(nome, cpf, idade, endereco, senha, idc)
+                                cliente = Cliente(nome, cpf, idade, endereco, senha, idc)
+                                loja.inserir_cliente(cliente, idc)
                                 print("\nCliente cadastrado com sucesso!")
                                 os.system("pause")
                                 os.system("cls")
 
                             case 2:
-                              #  os.system("cls")
+                                os.system("cls")
                                 print("--- CADASTRO ADM--- \nPreencha as informações:\n")
                                 admID +=1
                                 ida = admID
@@ -80,6 +79,8 @@ while sair == False:
                                 adm = Adm(user, senhaa, 0)
                                 loja.inserir_adm(adm)
                                 print("\nADM cadastrado com sucesso!")
+                                os.system("pause")
+                                os.system("cls")
 
 
                             case 3:
@@ -90,21 +91,36 @@ while sair == False:
                                 print("--- CADASTRO DE PRODUTO --- \nPreencha as informações:\n")
                                 nome_produto = input("NOME DO PRODUTO: ")
                                 descricao = input("DESCRIÇÃO DO PRODUTO: ")
-                                valor = int(input("VALOR: "))
+                                valor = float(input("VALOR: "))
 
-                                admin.cadastrar_produto(nome_produto, descricao, valor, idp)
+                                produto = Produto(nome_produto, descricao, valor, idp)
+
+                                loja.inserir_produto(produto, idp)
                                 print("\nProduto cadastrado com sucesso!")
                                 os.system("pause")
                                 os.system("cls")
 
                             case 4:
-                                pass
+                                os.system("cls")
+                                print("--- LISTA DE CLIENTES ---\n")
+                                loja.listarClientes()
+                                os.system("pause")
+                                os.system("cls")
                             case 5:
                                 pass
                             case 6:
-                                pass
+                                os.system("cls")
+                                print("--- LISTA DE CLIENTES ---\n")
+                                loja.listarClientes()
+                                os.system("pause")
+                                os.system("cls")
+                                
                             case 7:
-                                pass
+                                os.system("cls")
+                                print("--- LISTA DE PRODUTOS ---\n")
+                                loja.listarProdutos()
+                                os.system("pause")
+                                os.system("cls")
                             case 8:
                                 os.system("cls")
                                 menu_adm = 1
@@ -115,10 +131,17 @@ while sair == False:
                 else:
                     print("Credenciais inválidas. Tente novamente.")
             case 2:
+                loginCorreto = False
                 os.system("cls")
                 print("--- LOGIN CLIENTE ---")
                 cpf_cliente = int(input("Digite o CPF: "))
                 senha_cliente = input("Digite a senha: ")
+
+                for vetor, cpf in loja.clientes.items():
+                    if cpf.getCpf() == cpf_cliente and cpf.get_Senha() == senha_cliente:
+                        LoginCorreto = True
+                        print("")
+                        os.system("pause")
 
             case 3:  
                 print("SAINDO...")
